@@ -1,0 +1,61 @@
+name: arobisca_online_store_app
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Custom Dependancies
+  cupertino_icons: ^1.0.6
+  flutter_native_splash: ^2.4.0 #for the splash screen
+  get: ^4.6.6 #for page routing and show snack-bar
+  bottom_navy_bar: ^6.0.0 #for show beautiful bottom animation navigation  bar
+  smooth_page_indicator: ^1.1.0 #for animate the CarouselSlider product image slider
+  flutter_rating_bar: ^4.0.1 #for show start rating
+  font_awesome_flutter: ^10.7.0 #for use icons
+  animations: ^2.0.11 #for animation
+  provider: ^6.1.2 #for state-management
+  dropdown_button2: ^2.3.9 #for dropdown
+  flutter_cart: ^0.0.9 #for handle cart easly
+  get_storage: ^2.1.1 #to store local data like shared preference
+  flutter_login: ^5.0.0 #for login and registe UI
+  webview_flutter: ^4.8.0 #to open web-view for tracking pag
+  onesignal_flutter: ^5.2.0 #fro send notification
+  iconsax: ^0.0.8 #For cool Icons
+  flutter_svg: ^2.0.10+1
+  uni_links2: ^0.6.0+2
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "assets/images/logo.png"
+  adaptive_icon_background : "#ffffff"
+  adaptive_icon_foreground : "assets/images/logo.png"
+
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/onboarding/
+    - assets/logos/

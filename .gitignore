@@ -1,0 +1,79 @@
+# Flutter/Dart specific
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+build/
+generated/
+
+# IntelliJ/Android Studio specific
+*.iml
+.idea/
+.cache
+.gradle
+*.hprof
+
+# Visual Studio Code specific
+.vscode/
+
+# MacOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+
+# Android specific
+local.properties
+*.log
+*.keystore
+.gradle/
+*/build/
+
+# iOS specific
+ios/Flutter/.last_build_id
+ios/.symlinks/
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/.dart_tool/
+
+# Swift Package Manager
+**/Package.resolved
+
+# CocoaPods
+**/Podfile.lock
+**/Pods
+
+# Xcode
+**/xcuserdata
+**/DerivedData
+**/__MACOSX
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcshareddata/
+*.moved-aside
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+
+# Logs
+*.log
