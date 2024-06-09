@@ -1,7 +1,10 @@
 
+import 'package:arobisca_online_store_app/screen/product_cart_screen/cart_screen.dart';
 import 'package:arobisca_online_store_app/screen/product_cart_screen/provider/cart_provider.dart';
 import 'package:arobisca_online_store_app/utility/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import '../../../widget/custom_search_bar.dart';
 
@@ -48,9 +51,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   return Stack(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => const CartScreen()
+                            )
+                            );
+                        },
                         icon: const Icon(
-                          Icons.shopping_bag_outlined,
+                          Iconsax.shopping_bag,
                           color: Colors.white,
                         ),
                       ),
@@ -86,7 +95,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: CustomSearchBar(
                     controller: TextEditingController(),
                     onChanged: (val) {
-                      // context.dataProvider.filterProducts(val);
+                      context.dataProvider.filterProducts(val);
                     },
                   ),
                 ),

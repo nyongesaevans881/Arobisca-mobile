@@ -1,11 +1,9 @@
+import 'package:arobisca_online_store_app/screen/my_order_screen/widgets/empty_orders.dart';
 import 'package:arobisca_online_store_app/utility/utility_extension.dart';
-
 import '../../core/data/data_provider.dart';
-import '../tracking_screen/tracking_screen.dart';
 import '../../utility/app_color.dart';
 import '../../utility/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../widget/order_tile.dart';
 
@@ -25,20 +23,17 @@ class MyOrderScreen extends StatelessWidget {
       ),
       body: Consumer<DataProvider>(
         builder: (context, provider, child) {
-          return ListView.builder(
+          return context.dataProvider.orders.isEmpty ? const EmptyOrders() : ListView.builder(
             itemCount: context.dataProvider.orders.length,
             itemBuilder: (context, index) {
               final order = context.dataProvider.orders[index];
-              return OrderTile(
+              return 
+              OrderTile(
                 paymentMethod: order.paymentMethod ?? '',
                 items: '${(order.items?.safeElementAt(0)?.productName ?? '')} & ${order.items!.length - 1} Items'  ,
                 date: order.orderDate ?? '',
                 status: order.orderStatus ?? 'pending',
-                onTap: (){
-                  if(order.orderStatus == 'shipped'){
-                    Get.to(TrackingScreen(url: order.trackingUrl ?? ''));
-                  }
-                },
+                onTap: (){},
               );
             },
           );

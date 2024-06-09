@@ -101,7 +101,7 @@ class ProductGridTile extends StatelessWidget {
                   const SizedBox(width: 1),
                   if (product.offerPrice != null && product.offerPrice != product.price)
                     Text(
-                      "${product.price}",
+                      "Ksh.${product.price}",
                       style: const TextStyle(
                         decoration: TextDecoration.lineThrough,
                         color: Colors.green,

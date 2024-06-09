@@ -1,12 +1,13 @@
+import 'package:arobisca_online_store_app/utility/app_color.dart';
+import 'package:flutter/material.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter/services.dart';
+import '../../../utility/app_data.dart';
+import '../../../widget/page_wrapper.dart';
 import 'product_cart_screen/cart_screen.dart';
 import 'product_favorite_screen/favorite_screen.dart';
 import 'product_list_screen/product_list_screen.dart';
 import 'profile_screen/profile_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import '../../../utility/app_data.dart';
-import '../../../widget/page_wrapper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,9 +25,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int newIndex = 0;
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
+    // Set the status bar style whenever the HomeScreen is built
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColor.coffeeColor, 
+      statusBarIconBrightness: Brightness.light,
+    ));
+
     return PageWrapper(
       child: Scaffold(
         bottomNavigationBar: BottomNavyBar(
@@ -43,24 +51,24 @@ class _HomeScreenState extends State<HomeScreen> {
               )
               .toList(),
           onItemSelected: (currentIndex) {
-            newIndex = currentIndex;
-            setState(() {});
-          },
-        ),
-        body: PageTransitionSwitcher(
-          duration: const Duration(seconds: 1),
-          transitionBuilder: (
-            Widget child,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-          ) {
-            return FadeThroughTransition(
-              animation: animation,
-              secondaryAnimation: secondaryAnimation,
-              child: child,
+            setState(() {
+              newIndex = currentIndex;
+            });
+            _pageController.animateToPage(
+              currentIndex,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOut,
             );
           },
-          child: HomeScreen.screens[newIndex],
+        ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              newIndex = index;
+            });
+          },
+          children: HomeScreen.screens,
         ),
       ),
     );

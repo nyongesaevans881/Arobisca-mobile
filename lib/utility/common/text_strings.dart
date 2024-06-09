@@ -1,7 +1,6 @@
 class TTexts {
   // General Texts
   static const String submit = "Submit";
-  static const String appliance = "T-Store";
   static const String continueText = "Continue";
   static const String done = "Done";
 
@@ -56,5 +55,14 @@ static const String onboardingTitleMain3 = "From Our Roastery to Your Cup - Enjo
 
   // -- Home
   static const String homeAppBarTitle = "Good day for shopping";
-  static const String homeAppBarSubTitle = "Taimoor Sikander";
+
+  //----M-pesa
+  static const String mpesaTitle = "Lipa na M-pesa (STK Push)";
+  static const String mpesaDesc = "Please Enter your M-Pesa Number and Click: ";
+  static const String mpesaDesc2 = "You will Receive an";
+  static const String mpesaDesc3 = "Enter your M-Pesa Pin and Complete your Payment.";
+  static const String mpesaAction2 = "STK Push";
+  static const String mpesaAction = "Pay";
+  static const String mpesaHint = "M-pesa Number";
+
 }

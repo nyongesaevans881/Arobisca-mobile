@@ -20,7 +20,7 @@ class MyAddressPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Form(
               key: context.profileProvider.addressFormKey,
               child: Column(
@@ -32,7 +32,7 @@ class MyAddressPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     surfaceTintColor: Colors.white,
                     child: Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -75,10 +75,10 @@ class MyAddressPage extends StatelessWidget {
                               const SizedBox(width: 10),
                               Expanded(
                                 child: CustomTextField(
-                                  labelText: 'Country',
+                                  labelText: 'County',
                                   onSave: (value) {},
                                   controller: context.profileProvider.countryController,
-                                  validator: (value) => value!.isEmpty ? 'Please enter a country' : null,
+                                  validator: (value) => value!.isEmpty ? 'Please enter a County' : null,
                                 ),
                               ),
                             ],

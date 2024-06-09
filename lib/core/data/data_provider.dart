@@ -153,38 +153,14 @@ class DataProvider extends ChangeNotifier {
   }
 
 
-
-
-  // Future<void> getAllProduct({bool showSnack = false}) async {
-  //   try {
-  //     Response response = await service.getItems(endpointUrl: 'products');
-  //     // print(response);
-  //     ApiResponse<List<Product>> apiResponse = ApiResponse<List<Product>>.fromJson(
-  //       response.body,
-  //           (json) => (json as List).map((item) => Product.fromJson(item)).toList(),
-  //     );
-  //     _allProducts = apiResponse.data ?? [];
-  //     _filteredProducts = List.from(_allProducts); // Initialize with original data
-  //     notifyListeners();
-  //     if (showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
-  //   } catch (e) {
-  //     if (showSnack) SnackBarHelper.showErrorSnackBar(e.toString());
-  //   }
-  // }
-
-
     Future<void> getAllProduct({bool showSnack = false}) async {
     try {
-      print('Tried');
       Response response = await service.getItems(endpointUrl: 'products');
-      print('response.body');
       ApiResponse<List<Product>> apiResponse = ApiResponse<List<Product>>.fromJson(
         response.body,
             (json) => (json as List).map((item) => Product.fromJson(item)).toList(),
       );
-      print('object');
       _allProducts = apiResponse.data ?? [];
-      print(_allProducts);
       _filteredProducts = List.from(_allProducts); // Initialize with original data
       notifyListeners();
       if (showSnack) SnackBarHelper.showSuccessSnackBar(apiResponse.message);
@@ -194,30 +170,23 @@ class DataProvider extends ChangeNotifier {
   }
 
 
+  void filterProducts(String keyword) {
+    if (keyword.isEmpty) {
+      _filteredProducts = List.from(_allProducts);
+    } else {
+      final lowerKeyword = keyword.toLowerCase();
 
+      _filteredProducts = _allProducts.where((product) {
+        final productNameContainsKeyword = (product.name ?? '').toLowerCase().contains(lowerKeyword);
+        final categoryNameContainsKeyword =
+            product.proCategoryId?.name?.toLowerCase().contains(lowerKeyword) ?? false;
 
-
-
-
-  // void filterProducts(String keyword) {
-  //   if (keyword.isEmpty) {
-  //     _filteredProducts = List.from(_allProducts);
-  //   } else {
-  //     final lowerKeyword = keyword.toLowerCase();
-
-  //     _filteredProducts = _allProducts.where((product) {
-  //       final productNameContainsKeyword = (product.name ?? '').toLowerCase().contains(lowerKeyword);
-  //       // final categoryNameContainsKeyword =
-  //           // product.proSubCategoryId?.name?.toLowerCase().contains(lowerKeyword) ?? false;
-  //       // final subCategoryNameContainsKeyword =
-  //           // product.proSubCategoryId?.name?.toLowerCase().contains(lowerKeyword) ?? false;
-
-  //       //? You can add more conditions here if there are more fields to match against
-  //       return productNameContainsKeyword || categoryNameContainsKeyword || subCategoryNameContainsKeyword;
-  //     }).toList();
-  //   }
-  //   notifyListeners();
-  // }
+        // ? You can add more conditions here if there are more fields to match against
+        return productNameContainsKeyword || categoryNameContainsKeyword;
+      }).toList();
+    }
+    notifyListeners();
+  }
 
 
   Future<List<Poster>> getAllPosters({bool showSnack = false}) async {

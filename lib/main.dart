@@ -1,16 +1,18 @@
 import 'package:arobisca_online_store_app/core/data/data_provider.dart';
 import 'package:arobisca_online_store_app/screen/authentication/onboarding/onboarding.dart';
 import 'package:arobisca_online_store_app/screen/authentication/password_reset/set_new_password.dart';
-import 'package:arobisca_online_store_app/screen/home_screen';
+import 'package:arobisca_online_store_app/screen/home_screen.dart';
 import 'package:arobisca_online_store_app/screen/product_by_category_screen/provider/product_by_category_provider';
 import 'package:arobisca_online_store_app/screen/product_details_screen/provider/product_detail_provider.dart';
 import 'package:arobisca_online_store_app/screen/authentication/login_screen/provider/user_provider.dart';
 import 'package:arobisca_online_store_app/screen/product_cart_screen/provider/cart_provider.dart';
 import 'package:arobisca_online_store_app/screen/product_favorite_screen/provider/favorite_provider.dart';
 import 'package:arobisca_online_store_app/screen/profile_screen/provider/profile_provider.dart';
+import 'package:arobisca_online_store_app/utility/app_color.dart';
 import 'package:arobisca_online_store_app/utility/app_theme.dart';
 import 'package:arobisca_online_store_app/utility/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_cart/cart.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
@@ -22,12 +24,17 @@ import 'models/user.dart';
 import 'dart:async';
 
 Future<void> main() async {
+   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: AppColor.coffeeColor, // Set status bar color to black
+    statusBarIconBrightness: Brightness.light, // Set text/icons to white
+  ));
+  
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   var cart = FlutterCart();
 
   //todo should complete add one signal app id
-  OneSignal.initialize("YOUR_ONE_SIGNAL_APP_ID");
+  OneSignal.initialize("49e4ade7-74b7-455b-a19d-d9b66a14e043");
   OneSignal.Notifications.requestPermission(true);
   await cart.initializeCart(isPersistenceSupportEnabled: true);
 

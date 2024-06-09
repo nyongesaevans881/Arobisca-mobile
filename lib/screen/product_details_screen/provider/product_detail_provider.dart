@@ -14,11 +14,6 @@ class ProductDetailProvider extends ChangeNotifier {
   ProductDetailProvider(this._dataProvider);
 
   void addToCart(Product product) {
-    // if(product.proVariantId!.isNotEmpty && selectedVariant == null){
-    //   SnackBarHelper.showErrorSnackBar('Pleas select a variant');
-    //   return;
-    // }
-    // double? price = product.offerPrice != product.price ? product.offerPrice : product.price;
     double? price = 5000;
     flutterCart.addToCart(
       cartModel: CartModel(

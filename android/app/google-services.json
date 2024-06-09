@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "738998296597",
+    "project_id": "arobisca-dcfc9",
+    "storage_bucket": "arobisca-dcfc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738998296597:android:5f3d9e696efa1902596e1c",
+        "android_client_info": {
+          "package_name": "com.arobisca.onesignal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwCtqFLOOBE82pjdb9oouHK1_49a3Im7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

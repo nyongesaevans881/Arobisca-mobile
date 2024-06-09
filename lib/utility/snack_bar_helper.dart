@@ -21,7 +21,7 @@ class SnackBarHelper {
       backgroundColor: Colors.green,
       colorText: Colors.white,
       borderRadius: 20,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(milliseconds: 800),
       icon: const Icon(Icons.check_circle, color: Colors.white),
     );
   }

@@ -1,12 +1,12 @@
 import 'package:arobisca_online_store_app/screen/authentication/login_screen/provider/user_provider.dart';
 import 'package:arobisca_online_store_app/screen/authentication/password_reset/forgot_password.dart';
 import 'package:arobisca_online_store_app/screen/authentication/signup/signup.dart';
-import 'package:arobisca_online_store_app/screen/home_screen';
+import 'package:arobisca_online_store_app/screen/home_screen.dart';
 import 'package:arobisca_online_store_app/utility/animations/fade_page_route.dart';
+import 'package:arobisca_online_store_app/utility/app_color.dart';
 import 'package:arobisca_online_store_app/utility/common/sizes.dart';
 import 'package:arobisca_online_store_app/utility/common/text_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +22,8 @@ class _TLoginFormState extends State<TLoginForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
-
   bool _isLoading = false;
+  bool isChecked = true;
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
@@ -96,6 +96,9 @@ class _TLoginFormState extends State<TLoginForm> {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
                 }
+                if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                  return 'Please enter a valid email address';
+                }
                 return null;
               },
             ),
@@ -110,15 +113,15 @@ class _TLoginFormState extends State<TLoginForm> {
                 prefixIcon: const Icon(Iconsax.password_check),
                 labelText: TTexts.password,
                 suffixIcon: IconButton(
-                icon: Icon(
-                  _isPasswordVisible ? Iconsax.eye : Iconsax.eye_slash,
+                  icon: Icon(
+                    _isPasswordVisible ? Iconsax.eye : Iconsax.eye_slash,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
                 ),
-                onPressed: () {
-                  setState(() {
-                    _isPasswordVisible = !_isPasswordVisible;
-                  });
-                },
-              ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -143,7 +146,16 @@ class _TLoginFormState extends State<TLoginForm> {
                 ///----- Remember me
                 Row(
                   children: [
-                    Checkbox(value: true, onChanged: (value) {}),
+                    Checkbox(
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        // onChanged callback to toggle the checkbox
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
+                      activeColor: AppColor.darkGreen,
+                    ),
                     const Text(TTexts.rememberMe),
                   ],
                 ),
@@ -152,10 +164,10 @@ class _TLoginFormState extends State<TLoginForm> {
                 TextButton(
                   onPressed: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ForgetPassword()),
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ForgetPassword()),
+                    );
                   },
                   child: const Text(TTexts.forgetPassword),
                 ),

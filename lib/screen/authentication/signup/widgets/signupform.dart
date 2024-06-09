@@ -22,7 +22,8 @@ class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool _isPasswordVisible = false;
 
   bool _isLoading = false;
@@ -91,6 +92,9 @@ class _SignUpFormState extends State<SignUpForm> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your phone number';
+              }
+              if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+                return 'Please enter a valid 10-digit phone number';
               }
               return null;
             },
@@ -199,7 +203,10 @@ class _SignUpFormState extends State<SignUpForm> {
       final phoneNumber = _phoneNumberController.text;
       final password = _passwordController.text;
 
-      context.read<UserProvider>().register(username, email, phoneNumber, password).then((result) {
+      context
+          .read<UserProvider>()
+          .register(username, email, phoneNumber, password)
+          .then((result) {
         setState(() {
           _isLoading = false;
         });
@@ -208,12 +215,18 @@ class _SignUpFormState extends State<SignUpForm> {
           // Registration successful
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SuccessScreen(image: TImages.onSucesss, title: TTexts.yourAccountCreatedTitle, subtitle: TTexts.yourAccountCreatedSubtitle, 
-            onPressed: () {
-              Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context) => const LoginScreen()));
-            },)),
+            MaterialPageRoute(
+                builder: (context) => SuccessScreen(
+                      image: TImages.onSucesss,
+                      title: TTexts.yourAccountCreatedTitle,
+                      subtitle: TTexts.yourAccountCreatedSubtitle,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()));
+                      },
+                    )),
           );
         } else {
           // Registration failed

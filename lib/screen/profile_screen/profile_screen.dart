@@ -1,10 +1,11 @@
 import 'package:arobisca_online_store_app/screen/authentication/login_screen/login_screen.dart';
+import 'package:arobisca_online_store_app/screen/authentication/login_screen/provider/user_provider.dart';
 import 'package:arobisca_online_store_app/screen/my_address_screen/my_address_screen.dart';
 import 'package:arobisca_online_store_app/screen/my_order_screen/my_order_screen.dart';
 import 'package:arobisca_online_store_app/screen/product_cart_screen/cart_screen.dart';
 import 'package:arobisca_online_store_app/screen/product_favorite_screen/favorite_screen.dart';
-import 'package:arobisca_online_store_app/screen/product_list_screen/components/custom_app_bar.dart';
 import 'package:arobisca_online_store_app/screen/product_list_screen/product_list_screen.dart';
+import 'package:arobisca_online_store_app/screen/profile_screen/support/support.dart';
 import 'package:arobisca_online_store_app/utility/animations/open_container_wrapper.dart';
 import 'package:arobisca_online_store_app/utility/app_color.dart';
 import 'package:arobisca_online_store_app/utility/common/image_strings.dart';
@@ -14,8 +15,8 @@ import 'package:arobisca_online_store_app/widget/custom_shapes/curved_edges.dart
 import 'package:arobisca_online_store_app/widget/navigation_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -65,13 +66,13 @@ class ProfileScreen extends StatelessWidget {
                             width: 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
-                              color: Colors.red,
+                              color: AppColor.darkGreen,
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: Image.asset(
                                 TImages.profile,
-                                // fit: ,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
@@ -138,23 +139,58 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.darkGreen,
-                  foregroundColor: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: OpenContainerWrapper(
+                nextScreen: SupportPage(),
+                child: NavigationTile(
+                  icon: Iconsax.support5,
+                  title: 'Support',
                 ),
-                onPressed: () {
-                  context.userProvider.logOutUser();
-                  Get.offAll(const LoginScreen());
-                },
-                child: const Text('Logout', style: TextStyle(fontSize: 18)),
               ),
+            ),
+            const SizedBox(height: 15),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.darkGreen,
+                foregroundColor: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Confirm Logout', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),),
+                      content: const Text('Are you sure you want to log out?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Dismiss the dialog
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.darkGreen,
+                          ),
+                          onPressed: () {
+                            context.read<UserProvider>().logOutUser();
+                            Navigator.of(context).pop(); // Dismiss the dialog
+                            Get.offAll(() => const LoginScreen());
+                          },
+                          child: const Text('Confirm', style: TextStyle(color: Colors.white),),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: const Text('Logout', style: TextStyle(fontSize: 18)),
             ),
           ],
         ),

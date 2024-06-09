@@ -16,6 +16,7 @@ dependencies:
 
   # Custom Dependancies
   cupertino_icons: ^1.0.6
+  carousel_slider: ^4.2.1
   flutter_native_splash: ^2.4.0 #for the splash screen
   get: ^4.6.6 #for page routing and show snack-bar
   bottom_navy_bar: ^6.0.0 #for show beautiful bottom animation navigation  bar
@@ -45,9 +46,9 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: "launcher_icon"
-  image_path: "assets/images/logo.png"
+  image_path: "assets/images/arobisca.png"
   adaptive_icon_background : "#ffffff"
-  adaptive_icon_foreground : "assets/images/logo.png"
+  adaptive_icon_foreground : "assets/images/arobisca.png"
 
 
 # The following section is specific to Flutter packages.

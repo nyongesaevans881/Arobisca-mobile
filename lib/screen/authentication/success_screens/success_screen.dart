@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 
 class SuccessScreen extends StatelessWidget {
   final String image, title, subtitle;
+  final bool showLoginText;
   final VoidCallback onPressed;
 
   const SuccessScreen(
@@ -14,7 +15,9 @@ class SuccessScreen extends StatelessWidget {
       required this.image,
       required this.title,
       required this.subtitle,
-      required this.onPressed});
+      required this.onPressed, 
+      this.showLoginText = true,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +59,13 @@ class SuccessScreen extends StatelessWidget {
                   const SizedBox(
                     height: Tsizes.spaceBtwSections,
                   ),
-                  const Text(
-                    TTexts.yourAccountCreatedNotice,
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  Text(
+                    showLoginText ? TTexts.yourAccountCreatedNotice : '',
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: Tsizes.spaceBtwSections,
+                    height: Tsizes.spaceBtwInputFields,
                   ),
 
                   //Buttons

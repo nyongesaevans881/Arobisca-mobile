@@ -65,14 +65,14 @@ class ProductDetailScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            product.offerPrice != null ? "\$${product.offerPrice}" : "\$${product.price}",
+                            product.offerPrice != null ? "KES.${product.offerPrice}" : "KES.${product.price}",
                             style: Theme.of(context).textTheme.displayLarge,
                           ),
                           const SizedBox(width: 3),
                           Visibility(
                             visible: product.offerPrice != product.price,
                             child: Text(
-                              "\$${product.price}",
+                              "KES.${product.price}",
                               style: const TextStyle(
                                 decoration: TextDecoration.lineThrough,
                                 color: AppColor.darkGreen,
@@ -83,31 +83,11 @@ class ProductDetailScreen extends StatelessWidget {
                           const Spacer(),
                           Text(
                             product.quantity != 0 ? "Available stock : ${product.quantity}" : "Not available",
-                            style: const TextStyle(fontWeight: FontWeight.w500),
+                            style: const TextStyle(fontWeight: FontWeight.w500, color: AppColor.darkGreen),
                           )
                         ],
                       ),
                       const SizedBox(height: 15),
-                      // product.proVariantId!.isNotEmpty
-                      //     ? Text(
-                      //         'Available ${product.proVariantTypeId?.type}',
-                      //         style: const TextStyle(color: Colors.red, fontSize: 16),
-                      //       )
-                      //     : const SizedBox(),
-                      // Consumer<ProductDetailProvider>(
-                      //   builder: (context, proDetailProvider, child) {
-                      //     return HorizontalList(
-                      //       items: product.proVariantId ?? [],
-                      //       itemToString: (val) => val,
-                      //       selected: proDetailProvider.selectedVariant,
-                      //       onSelect: (val) {
-                      //         proDetailProvider.selectedVariant = val;
-                      //         proDetailProvider.updateUI();
-                      //       },
-                      //     );
-                      //   },
-                      // ),
-                      //? product description
                       Text(
                         "About Product",
                         style: Theme.of(context).textTheme.headlineMedium,

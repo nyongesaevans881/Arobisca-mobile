@@ -1,4 +1,4 @@
- const MAIN_URL = 'http://localhost:3000';
+const MAIN_URL = 'http://localhost:3000';
 // const MAIN_URL = 'http://10.0.2.2:3000';
 
 const FAVORITE_PRODUCT_BOX = 'FAVORITE_PRODUCT_BOX';
