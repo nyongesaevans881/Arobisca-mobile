@@ -1,5 +1,5 @@
 
-import 'package:arobisca_online_store_app/screen/authentication/onboarding/widgets/controllers_onboarding.dart';
+import 'package:arobisca_online_store_app/screen/authentication/login_screen/login_screen.dart';
 import 'package:arobisca_online_store_app/utility/app_color.dart';
 import 'package:arobisca_online_store_app/utility/common/device_utility.dart';
 import 'package:arobisca_online_store_app/utility/common/sizes.dart';
@@ -19,7 +19,9 @@ class OnBoardingNextButton extends StatelessWidget {
       right: Tsizes.defaultSpace,
       bottom: TDeviceUtils.getBottomNavigationBarHeight(),
       child: ElevatedButton(
-        onPressed: () => OnBoardingController.instance.nextPage(),
+        onPressed: () {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        },
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           backgroundColor: AppColor.darkGreen,

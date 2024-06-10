@@ -54,15 +54,15 @@ class _TLoginFormState extends State<TLoginForm> {
             FadePageRoute(page: const HomeScreen()),
           );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Login failed: User ID not found')),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(content: Text('Login failed: User ID not found')),
+          // );
         }
       } else {
         // Login failed, show error message
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login failed: $result')),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text('Login failed: $result')),
+        // );
       }
     }
   }

@@ -1,4 +1,6 @@
+import 'package:arobisca_online_store_app/utility/common/image_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class EmptyCart extends StatelessWidget {
   const EmptyCart({super.key});
@@ -12,7 +14,9 @@ class EmptyCart extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Center(
-                child: Image.asset('assets/images/empty_cart.png'),
+                child: SvgPicture.asset(
+                TImages.cart,
+              ),
               ),
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:arobisca_online_store_app/screen/authentication/login_screen/login_screen.dart';
 import 'package:arobisca_online_store_app/screen/authentication/login_screen/provider/user_provider.dart';
 import 'package:arobisca_online_store_app/utility/common/helper_functions.dart';
 import 'package:arobisca_online_store_app/utility/common/image_strings.dart';
@@ -93,7 +94,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()) 
+                    );
+                  },
                   child: const Text(TTexts.done, style: TextStyle(color: Colors.white)),
                 ),
               ),

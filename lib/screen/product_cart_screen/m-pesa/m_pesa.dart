@@ -3,6 +3,7 @@ import 'package:arobisca_online_store_app/utility/animations/animated_switcher_w
 import 'package:arobisca_online_store_app/utility/app_color.dart';
 import 'package:arobisca_online_store_app/utility/common/sizes.dart';
 import 'package:arobisca_online_store_app/utility/common/text_strings.dart';
+import 'package:arobisca_online_store_app/utility/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
@@ -109,7 +110,7 @@ class _MPesaState extends State<MPesa> {
                         ),
                         AnimatedSwitcherWrapper(
                           child: Text(
-                            "KES. ${context.read<CartProvider>().getCartSubTotal()}",
+                            "KES. ${context.cartProvider.getGrandTotal()} ",
                             style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w900,
@@ -148,7 +149,7 @@ class _MPesaState extends State<MPesa> {
                       child: _isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
                           : Text(
-                              'Pay :  KES. ${context.read<CartProvider>().getCartSubTotal()}',
+                              'Pay :  KES. ${context.cartProvider.getGrandTotal()} ',
                               style: const TextStyle(color: Colors.white),
                             ),
                     ),

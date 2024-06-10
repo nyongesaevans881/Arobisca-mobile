@@ -207,8 +207,8 @@ class CartProvider extends ChangeNotifier {
           () => MPesa(
                 orderDetails: getOrderDetails(), // Pass order details
               ),
-          transition: Transition.downToUp,
-          duration: const Duration(milliseconds: 800));
+          transition: Transition.zoom,
+          duration: const Duration(milliseconds: 400));
     }
   }
 
@@ -247,7 +247,6 @@ class CartProvider extends ChangeNotifier {
       );
 
       if (response.isOk) {
-        // Payment successful, now add order
         // ignore: use_build_context_synchronously
         await addMpesaOrder(context, orderDetails);
       } else {
@@ -255,7 +254,6 @@ class CartProvider extends ChangeNotifier {
             'MPesa payment failed: ${response.body['message']}');
       }
     } catch (e) {
-      print("Transaction error: ${e}");
       SnackBarHelper.showErrorSnackBar('An error occurred: $e');
     }
   }

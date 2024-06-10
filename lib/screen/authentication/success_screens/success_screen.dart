@@ -1,4 +1,3 @@
-import 'package:arobisca_online_store_app/utility/app_color.dart';
 import 'package:arobisca_online_store_app/utility/common/helper_functions.dart';
 import 'package:arobisca_online_store_app/utility/common/sizes.dart';
 import 'package:arobisca_online_store_app/utility/common/text_strings.dart';

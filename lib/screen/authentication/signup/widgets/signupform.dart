@@ -221,7 +221,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       title: TTexts.yourAccountCreatedTitle,
                       subtitle: TTexts.yourAccountCreatedSubtitle,
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LoginScreen()));
@@ -230,17 +230,17 @@ class _SignUpFormState extends State<SignUpForm> {
           );
         } else {
           // Registration failed
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(result)),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text(result)),
+          // );
         }
       }).catchError((error) {
         setState(() {
           _isLoading = false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $error')),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text('Error: $error')),
+        // );
       });
     }
   }

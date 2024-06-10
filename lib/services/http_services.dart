@@ -20,10 +20,10 @@ class HttpService  {
   Future<Response> addItem({required String endpointUrl, required dynamic itemData}) async {
     try {
       final response = await GetConnect().post('$baseUrl/$endpointUrl',itemData);
-      // print('Add Item Response: ${response.body}');
+      print('Add Item Response: ${response.body}');
       return response;
     } catch (e) {
-      // print('Error: $e');
+      print('Error: $e');
       return Response(body: json.encode({'message': e.toString()}), statusCode: 500);
     }
   }
