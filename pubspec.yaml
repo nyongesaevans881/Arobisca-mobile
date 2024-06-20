@@ -33,7 +33,7 @@ dependencies:
   onesignal_flutter: ^5.2.0 #fro send notification
   iconsax: ^0.0.8 #For cool Icons
   flutter_svg: ^2.0.10+1
-  uni_links2: ^0.6.0+2
+  go_router: ^14.2.0
 
 
 

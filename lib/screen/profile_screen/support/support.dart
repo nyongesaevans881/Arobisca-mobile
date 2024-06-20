@@ -1,6 +1,6 @@
 import 'package:arobisca_online_store_app/utility/app_color.dart';
-import 'package:arobisca_online_store_app/utility/common/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SupportPage extends StatelessWidget {
@@ -8,6 +8,10 @@ class SupportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColor.coffeeColor, // Set status bar color to black
+      statusBarIconBrightness: Brightness.light, // Set text/icons to white
+    ));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Support',

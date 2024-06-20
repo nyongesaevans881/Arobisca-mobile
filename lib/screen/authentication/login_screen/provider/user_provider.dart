@@ -80,8 +80,8 @@ Future<String?> register(String username, String email, String phoneNumber, Stri
   }
 }
 
-//---------RESET PASSWORD FUNCTIONS
-Future<String?> resetPassword(String email) async {
+//---------REQUEST RESET PASSWORD FUNCTIONS
+Future<String?> requestResetPassword(String email) async {
     try {
       Map<String, dynamic> userEmail = {
       "email": email
@@ -98,6 +98,72 @@ Future<String?> resetPassword(String email) async {
       print(e);
       SnackBarHelper.showErrorSnackBar('A frontend error occurred: $e');
       return 'A frontend error occurred: $e';
+    }
+  }
+
+
+//---------- Verify Reset Code Function
+  Future<String?> verifyResetCode(String email, String resetCode) async {
+    try {
+      Map<String, dynamic> verifyData = {
+        "email": email.toLowerCase(),
+        "resetCode": resetCode
+      };
+      final response = await service.addItem(
+          endpointUrl: 'password/verifyResetCode', itemData: verifyData);
+      
+      if (response.isOk) {
+        final responseBody = response.body;
+        if (responseBody != null && responseBody['message'] == 'Reset code verified') {
+          SnackBarHelper.showSuccessSnackBar(responseBody['message']);
+          log('Code verification success');
+          return null;
+        } else {
+          SnackBarHelper.showErrorSnackBar('Failed to Verify Code: ${responseBody['message']}');
+          return 'Failed to Verify Code';
+        }
+      } else {
+        SnackBarHelper.showErrorSnackBar(
+            'Error ${response.body?['message'] ?? response.statusText}');
+        return 'Error ${response.body?['message'] ?? response.statusText}';
+      }
+    } catch (e) {
+      print(e);
+      SnackBarHelper.showErrorSnackBar('An error occurred: $e');
+      return 'An error occurred: $e';
+    }
+  }
+
+//---------RESET PASSWORD FUNCTIONS
+Future<String?> resetPassword(String email, String resetCode, String newPassword) async {
+    try {
+      Map<String, dynamic> resetData = {
+        "email": email.toLowerCase(),
+        "resetCode": resetCode,
+        "newPassword": newPassword
+      };
+      final response = await service.addItem(
+          endpointUrl: 'password/resetPassword', itemData: resetData);
+
+      if (response.isOk) {
+        final responseBody = response.body;
+        if (responseBody != null && responseBody['message'] == 'Password reset successfully') {
+          SnackBarHelper.showSuccessSnackBar(responseBody['message']);
+          log('Password reset success');
+          return null;
+        } else {
+          SnackBarHelper.showErrorSnackBar('Failed to reset password: ${responseBody['message']}');
+          return 'Failed to reset password';
+        }
+      } else {
+        SnackBarHelper.showErrorSnackBar(
+            'Error ${response.body?['message'] ?? response.statusText}');
+        return 'Error ${response.body?['message'] ?? response.statusText}';
+      }
+    } catch (e) {
+      print(e);
+      SnackBarHelper.showErrorSnackBar('An error occurred: $e');
+      return 'An error occurred: $e';
     }
   }
 

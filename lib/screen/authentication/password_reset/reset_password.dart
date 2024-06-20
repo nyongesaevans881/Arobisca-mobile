@@ -1,5 +1,5 @@
-import 'package:arobisca_online_store_app/screen/authentication/login_screen/login_screen.dart';
 import 'package:arobisca_online_store_app/screen/authentication/login_screen/provider/user_provider.dart';
+import 'package:arobisca_online_store_app/screen/authentication/password_reset/set_new_password.dart';
 import 'package:arobisca_online_store_app/utility/common/helper_functions.dart';
 import 'package:arobisca_online_store_app/utility/common/image_strings.dart';
 import 'package:arobisca_online_store_app/utility/common/sizes.dart';
@@ -21,6 +21,7 @@ class ResetPasswordScreen extends StatefulWidget {
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   bool _isLoading = false;
+  final _codeController = TextEditingController();
 
   Future<void> _resendLink() async {
     setState(() {
@@ -28,21 +29,35 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     });
 
     final authProvider = Provider.of<UserProvider>(context, listen: false);
-    final response = await authProvider.resetPassword(widget.email);
+    await authProvider.requestResetPassword(widget.email);
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  Future<void> _verifyCode() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final authProvider = Provider.of<UserProvider>(context, listen: false);
+    final response = await authProvider.verifyResetCode(widget.email, _codeController.text);
 
     setState(() {
       _isLoading = false;
     });
 
-    if (response == null) {
-      // Handle success (show snackbar or dialog)
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Password reset link sent to ${widget.email}')),
-      );
+    if (response != null) {
+      // Handle failure case here
+      // You can show a snackbar, or display an error message.
     } else {
-      // Handle error (show snackbar or dialog)
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(response)),
+      // Navigate to SetNewPassword with the email and code passed in
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SetNewPassword(email: widget.email, resetCode: _codeController.text),
+        ),
       );
     }
   }
@@ -54,8 +69,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () => Get.back(), icon: const Icon(CupertinoIcons.clear),
-          )
+            onPressed: () => Get.back(),
+            icon: const Icon(CupertinoIcons.clear),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -63,47 +79,38 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           padding: const EdgeInsets.all(Tsizes.defaultSpace),
           child: Column(
             children: [
-              //------- Image with 60% of screen width
               SvgPicture.asset(
                 TImages.onSucesss,
                 width: THelperFunctions.screenWidth() * 0.6,
               ),
-
-              const SizedBox(
-                height: Tsizes.spaceBtwSections,
-              ),
-
-              // Title and Subtitle
+              const SizedBox(height: Tsizes.spaceBtwSections),
               const Text(
                 TTexts.changeYourPasswordTitle,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500
-                ),
+                style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: Tsizes.spaceBtwItems,
+              const SizedBox(height: Tsizes.spaceBtwItems),
+              Text(
+                TTexts.changeYourPasswordSubtitle,
+                style: Theme.of(context).textTheme.labelMedium,
+                textAlign: TextAlign.center,
               ),
-
-              Text(TTexts.changeYourPasswordSubtitle, style: Theme.of(context).textTheme.labelMedium, textAlign: TextAlign.center,),
-              const SizedBox(height: Tsizes.spaceBtwSections,),
-
-              // Buttons
+              const SizedBox(height: Tsizes.spaceBtwSections),
+              TextFormField(
+                controller: _codeController,
+                decoration: const InputDecoration(
+                  labelText: 'Enter Reset Code',
+                ),
+              ),
+              const SizedBox(height: Tsizes.spaceBtwSections),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()) 
-                    );
-                  },
-                  child: const Text(TTexts.done, style: TextStyle(color: Colors.white)),
+                  onPressed: _verifyCode,
+                  child: const Text("Verify", style: TextStyle(color: Colors.white)),
                 ),
               ),
-              const SizedBox(height: Tsizes.spaceBtwSections,),
+              const SizedBox(height: Tsizes.spaceBtwSections),
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
@@ -112,9 +119,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ? const SizedBox(
                           height: 16,
                           width: 16,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
+                          child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Text(TTexts.resendEmail),
                 ),

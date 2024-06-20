@@ -45,6 +45,10 @@ class _MPesaState extends State<MPesa> {
 
   @override
   Widget build(BuildContext context) {
+       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: AppColor.coffeeColor, // Set status bar color to black
+    statusBarIconBrightness: Brightness.light, // Set text/icons to white
+  ));
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

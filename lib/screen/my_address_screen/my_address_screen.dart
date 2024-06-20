@@ -1,4 +1,5 @@
 import 'package:arobisca_online_store_app/widget/custom_text_field.dart';
+import 'package:flutter/services.dart';
 
 import '../../utility/extensions.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +10,19 @@ class MyAddressPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColor.coffeeColor, // Set status bar color to black
+      statusBarIconBrightness: Brightness.light, // Set text/icons to white
+    ));
     context.profileProvider.retrieveSavedAddress();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "My Address",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColor.darkGreen),
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: AppColor.darkGreen),
         ),
       ),
       body: SingleChildScrollView(
@@ -29,7 +37,8 @@ class MyAddressPage extends StatelessWidget {
                 children: [
                   Card(
                     elevation: 4,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
                     surfaceTintColor: Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -41,25 +50,33 @@ class MyAddressPage extends StatelessWidget {
                             onSave: (value) {},
                             inputType: TextInputType.number,
                             controller: context.profileProvider.phoneController,
-                            validator: (value) => value!.isEmpty ? 'Please enter a phone number' : null,
+                            validator: (value) => value!.isEmpty
+                                ? 'Please enter a phone number'
+                                : null,
                           ),
                           CustomTextField(
                             labelText: 'Street',
                             onSave: (val) {},
-                            controller: context.profileProvider.streetController,
-                            validator: (value) => value!.isEmpty ? 'Please enter a street' : null,
+                            controller:
+                                context.profileProvider.streetController,
+                            validator: (value) =>
+                                value!.isEmpty ? 'Please enter a street' : null,
                           ),
                           CustomTextField(
                             labelText: 'City/Town',
                             onSave: (value) {},
                             controller: context.profileProvider.cityController,
-                            validator: (value) => value!.isEmpty ? 'Please enter a City/Town' : null,
+                            validator: (value) => value!.isEmpty
+                                ? 'Please enter a City/Town'
+                                : null,
                           ),
                           CustomTextField(
                             labelText: 'Location',
                             onSave: (value) {},
                             controller: context.profileProvider.stateController,
-                            validator: (value) => value!.isEmpty ? 'Please enter a Location' : null,
+                            validator: (value) => value!.isEmpty
+                                ? 'Please enter a Location'
+                                : null,
                           ),
                           Row(
                             children: [
@@ -68,8 +85,11 @@ class MyAddressPage extends StatelessWidget {
                                   labelText: 'Postal Code',
                                   onSave: (value) {},
                                   inputType: TextInputType.number,
-                                  controller: context.profileProvider.postalCodeController,
-                                  validator: (value) => value!.isEmpty ? 'Please enter a code' : null,
+                                  controller: context
+                                      .profileProvider.postalCodeController,
+                                  validator: (value) => value!.isEmpty
+                                      ? 'Please enter a code'
+                                      : null,
                                 ),
                               ),
                               const SizedBox(width: 10),
@@ -77,8 +97,11 @@ class MyAddressPage extends StatelessWidget {
                                 child: CustomTextField(
                                   labelText: 'County',
                                   onSave: (value) {},
-                                  controller: context.profileProvider.countryController,
-                                  validator: (value) => value!.isEmpty ? 'Please enter a County' : null,
+                                  controller:
+                                      context.profileProvider.countryController,
+                                  validator: (value) => value!.isEmpty
+                                      ? 'Please enter a County'
+                                      : null,
                                 ),
                               ),
                             ],
@@ -93,15 +116,19 @@ class MyAddressPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColor.darkGreen,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 16),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
                       ),
                       onPressed: () {
-                        if (context.profileProvider.addressFormKey.currentState!.validate()) {
+                        if (context.profileProvider.addressFormKey.currentState!
+                            .validate()) {
                           context.profileProvider.storeAddress();
                         }
                       },
-                      child: const Text('Update Address', style: TextStyle(fontSize: 18)),
+                      child: const Text('Update Address',
+                          style: TextStyle(fontSize: 18)),
                     ),
                   ),
                 ],

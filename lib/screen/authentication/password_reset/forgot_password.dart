@@ -29,7 +29,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       final authProvider = Provider.of<UserProvider>(context, listen: false);
       final email = _emailController.text.trim();
 
-      final response = await authProvider.resetPassword(email);
+      final response = await authProvider.requestResetPassword(email);
       setState(() {
         _isLoading = false;
       });

@@ -35,6 +35,7 @@ class CartProvider extends ChangeNotifier {
   Coupon? couponApplied;
   double couponCodeDiscount = 0;
   String selectedPaymentOption = 'Prepaid - Lipa na M-pesa';
+  bool isCouponChecking = false;
 
   CartProvider(this._userProvider);
 
@@ -63,12 +64,15 @@ class CartProvider extends ChangeNotifier {
   }
 
 //---------------- Check If Coupon is valid
-  checkCoupon() async {
+ Future<void> checkCoupon() async {
     try {
       if (couponController.text.isEmpty) {
         SnackBarHelper.showErrorSnackBar('Enter a coupon code');
         return;
       }
+      isCouponChecking = true;
+      notifyListeners();
+
       List<String> productIds =
           myCartItems.map((cartItem) => cartItem.productId).toList();
       Map<String, dynamic> couponData = {
@@ -98,11 +102,13 @@ class CartProvider extends ChangeNotifier {
         SnackBarHelper.showErrorSnackBar(
             'Error ${response.body?['message'] ?? response.statusText}');
       }
-      notifyListeners();
     } catch (e) {
       print(e);
       SnackBarHelper.showErrorSnackBar('An error occurred: $e');
       rethrow;
+    } finally {
+      isCouponChecking = false;
+      notifyListeners();
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:arobisca_online_store_app/screen/product_cart_screen/provider/ca
 import 'package:arobisca_online_store_app/screen/product_favorite_screen/widgets/empty_fav.dart';
 import 'package:arobisca_online_store_app/screen/product_list_screen/components/poster_section.dart';
 import 'package:arobisca_online_store_app/utility/extensions.dart';
+import 'package:flutter/services.dart';
 import 'package:iconsax/iconsax.dart';
 import 'provider/favorite_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColor.coffeeColor, // Set status bar color to black
+      statusBarIconBrightness: Brightness.light, // Set text/icons to white
+    ));
 
     Future.delayed(Duration.zero, () {
       context.favoriteProvider.loadFavoriteItems();

@@ -1,5 +1,5 @@
 import 'package:arobisca_online_store_app/screen/authentication/login_screen/provider/user_provider.dart';
-import 'package:arobisca_online_store_app/screen/authentication/password_reset/forgot_password.dart';
+import 'package:arobisca_online_store_app/screen/authentication/password_reset/forgot_password_method.dart';
 import 'package:arobisca_online_store_app/screen/authentication/signup/signup.dart';
 import 'package:arobisca_online_store_app/screen/home_screen.dart';
 import 'package:arobisca_online_store_app/utility/animations/fade_page_route.dart';
@@ -53,16 +53,7 @@ class _TLoginFormState extends State<TLoginForm> {
             context,
             FadePageRoute(page: const HomeScreen()),
           );
-        } else {
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(content: Text('Login failed: User ID not found')),
-          // );
         }
-      } else {
-        // Login failed, show error message
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(content: Text('Login failed: $result')),
-        // );
       }
     }
   }
@@ -166,11 +157,11 @@ class _TLoginFormState extends State<TLoginForm> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ForgetPassword()),
+                          builder: (context) => const ForgotPasswordMethodScreen()),
                     );
                   },
                   child: const Text(TTexts.forgetPassword),
-                ),
+                ),  
               ],
             ),
 
